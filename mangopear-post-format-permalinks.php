@@ -1,14 +1,15 @@
 <?php
 
+	/**
+	 * Plugin Name: Mangopear: Post format permalinks
+	 * Plugin URI: https://github.com/MangopearUK/Mangopear-Post-format-permalinks
+	 * Description: Include the post format slug in your permalinks. Simply use the <code>%post_format%</code> tag as part of your custom permalink.
+	 * Version: 1.3.0
+	 * Author: Andi North (@MangopearUK)
+	 * Author URI: https://mangopear.co.uk
+	 */
+	
 
-    /**
-     * Plugin Name: Mangopear: Post format permalinks
-     * Plugin URI: https://github.com/bungeshea/post-format-permalink
-     * Description: Include the post format slug in your permalinks. Simply use the <code>%post_format%</code> tag as part of your custom permalink.
-     * Version: 1.2
-     * Author: Andi North (@MangopearUK)
-     * Author URI: https://mangopear.co.uk
-     */
 
     add_filter( 'post_link', 'post_format_permalink', 10, 2 );
     add_filter( 'post_type_link', 'post_format_permalink', 10, 2 );
