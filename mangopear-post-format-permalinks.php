@@ -10,26 +10,38 @@
 	 */
 	
 
+	/**
+	 * [1]  Set up string replacement function
+	 *
+	 *      @since 1.3.0
+	 *
+	 *      [a] If we're not using the %post_format% tag in our permalinks, bail early
+	 *      [b] Get the post object
+	 *      [c]	Get post format slug
+	 *      [d]	Set the slug for standard posts
+	 *      [e]	Apply the post format slug to the permalink
+	 *      [f]	Add filter for it all to, you know, actually work...
+	 */
+	
+	function mangopear_post_format_permalink($permalink, $post_id) {
+		if (strpos($permalink, '%post_format%') === FALSE) return $permalink;	// [a]
 
-    add_filter( 'post_link', 'post_format_permalink', 10, 2 );
-    add_filter( 'post_type_link', 'post_format_permalink', 10, 2 );
 
-    function post_format_permalink( $permalink, $post_id ) {
+		$post = get_post($post_id);												// [b]
+		if (! $post) return $permalink;											// [b]
 
-        // if we're not using the %post_format% tag in our permalinks, bail early
-        if ( strpos($permalink, '%post_format%') === FALSE ) return $permalink;
 
-        // get the post object
-        $post = get_post( $post_id );
-        if ( ! $post ) return $permalink;
+		$format = get_post_format($post->ID);									// [c]
 
-        // get post format slug
-        $format = get_post_format( $post->ID );
 
-        // set the slug for standard posts
-        if ( empty( $format ) )
-            $format = apply_filters( 'post_format_standard_slug', 'standard' );
+		if (empty($format)) {													// [d]
+			$format = apply_filters('post_format_standard_slug', 'standard');	// [d]
+		}																		// [d]
 
-        // apply the post format slug to the permalink
-        return str_replace( '%post_format%', $format, $permalink );
-    }
+
+		return str_replace('%post_format%', $format, $permalink);				// [e]
+	}
+
+
+	add_filter('post_link',      'mangopear_post_format_permalink', 10, 2);		// [f]
+	add_filter('post_type_link', 'mangopear_post_format_permalink', 10, 2);		// [f]
