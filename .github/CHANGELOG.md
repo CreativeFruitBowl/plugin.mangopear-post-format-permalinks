@@ -1,6 +1,6 @@
 # Changelog
 
-## Version v1.1.0
+## Version v1.3.0
 
 * Release date: **26th December 2019**
 
@@ -9,6 +9,6 @@
 
 -----
 
-## Version v1.0.0
+## Version v1.2.0
 
 * Init plugin
